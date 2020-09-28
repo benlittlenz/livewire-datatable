@@ -1,15 +1,23 @@
 <div>
-    <table class="table table-striped">
+    <table class="table table-striped table-responsive">
         <thead>
-
+            <tr>
+                @foreach($columns as $column)
+                    <th>
+                        {{ $column }}
+                    </th>
+                @endforeach
+            </tr>
         </thead>
 
         <tbody>
             @foreach($this->records() as $record)
                 <tr>
-                    <td>
-                        {{ $record->id}}
-                    </td>
+                    @foreach ($columns as $column)
+                        <td>
+                            {{ $record->{$column} }}
+                        </td>
+                    @endforeach
                 </tr>
             @endforeach
         </tbody>
