@@ -8,7 +8,11 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    <livewire:datatable model="App\Models\User" exclude="password,remember_token"/>
+                    <livewire:datatable
+                        model="App\Models\User"
+                        exclude="password,remember_token"
+                        paginate="20"
+                    />
                 </div>
             </div>
         </div>
