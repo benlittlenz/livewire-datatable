@@ -9,16 +9,22 @@ class Datatable extends Component
 {
     public $model;
     public $columns;
+    public $exclude;
 
-    public function mount($model)
+    public function mount($model, $exclude = '')
     {
         $this->model = $model;
+        $this->exclude = explode(',', $exclude);
         $this->columns = $this->columns();
     }
 
     public function columns()
     {
-        return Schema::getColumnListing($this->builder()->getQuery()->from);
+        return collect(Schema::getColumnListing($this->builder()->getQuery()->from))
+            ->reject(function($column) {
+                return in_array($column, $this->exclude);
+            })
+            ->toArray();
     }
 
     public function builder()
